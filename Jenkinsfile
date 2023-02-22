@@ -43,7 +43,7 @@ pipeline {
             steps {
                 withAWS(credentials: 'aws-access-key', region: 'eu-west-1') {
                     dir("eb") {
-                        sh 'eb create hello-springrest'
+                        sh 'eb deploy hello-springrest'
                     }
                 }
             }
