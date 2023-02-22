@@ -23,18 +23,16 @@ pipeline {
             }
             post {
                 always {
-                    junit(testResults: 'build/test-results/test/*xml', allowEmptyResults: true)
+                    junit(testResults: 'app/build/test-results/test/*xml', allowEmptyResults: true)
                 }
             }
         }
         stage('Image generation'){
             steps {
-                dir('eb'){
-                    sh 'VERSION_TAG=1.0.${BUILD_NUMBER} docker-compose build'
-                    sh 'VERSION_TAG=1.0.${BUILD_NUMBER} docker-compose push'
-                    sh 'docker-compose build'
-                    sh 'docker-compose push'
-                }
+                sh 'VERSION_TAG=1.0.${BUILD_NUMBER} docker-compose build'
+                sh 'VERSION_TAG=1.0.${BUILD_NUMBER} docker-compose push'
+                sh 'docker-compose build'
+                sh 'docker-compose push'
                 sh 'git tag 1.0.${BUILD_NUMBER}'
                 sshagent(['github-ssh']) {
                     sh 'git push git@github.com:${GIT_PATH}.git --tags'
@@ -44,9 +42,7 @@ pipeline {
         stage("Infrastructure"){
             steps {
                 withAWS(credentials: 'aws-access-key', region: 'eu-west-1') {
-                    dir("eb") {
-                        sh 'eb create hello-springrest'
-                    }
+                    sh 'eb create hello-springrest'
                 }
             }
         }
