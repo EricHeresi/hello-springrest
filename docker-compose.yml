@@ -1,6 +1,6 @@
 version: "3"
 services:
-  nginx:
+  springrest:
     build: .
     image: ghcr.io/${GIT_PATH:-ericheresi/hello-springrest}/aws_springrest:${VERSION_TAG:-latest}
     ports:
