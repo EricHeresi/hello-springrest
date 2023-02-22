@@ -1,0 +1,6 @@
+version: "3"
+services:
+  springrest:
+    image: ghcr.io/${GIT_PATH:-ericheresi/hello-springrest}/aws_springrest:${VERSION_TAG:-latest}
+    ports:
+      - 80:8080

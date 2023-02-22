@@ -34,7 +34,7 @@ app/build/
 app/.vscode/
 
 # Elastic Beanstalk Files
-.elasticbeanstalk/*
-!.elasticbeanstalk/config.yml
-!.elasticbeanstalk/*.cfg.yml
-!.elasticbeanstalk/*.global.yml
+eb/.elasticbeanstalk/*
+!eb/.elasticbeanstalk/config.yml
+!eb/.elasticbeanstalk/*.cfg.yml
+!eb/.elasticbeanstalk/*.global.yml
