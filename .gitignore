@@ -1,34 +1,40 @@
-HELP.md
-target/
-!.mvn/wrapper/maven-wrapper.jar
-!gradle/wrapper/gradle-wrapper.jar
-!**/src/main/**/target/
-!**/src/test/**/target/
+app/HELP.md
+app/target/
+!app/.mvn/wrapper/maven-wrapper.jar
+!app/gradle/wrapper/gradle-wrapper.jar
+!app/**/src/main/**/target/
+!app/**/src/test/**/target/
 
 ### STS ###
-.apt_generated
-.classpath
-.factorypath
-.project
-.settings
-.springBeans
-.sts4-cache
+app/.apt_generated
+app/.classpath
+app/.factorypath
+app/.project
+app/.settings
+app/.springBeans
+app/.sts4-cache
 
 ### IntelliJ IDEA ###
-.idea
-*.iws
-*.iml
-*.ipr
+app/.idea
+app/*.iws
+app/*.iml
+app/*.ipr
 
 ### NetBeans ###
-/nbproject/private/
-/nbbuild/
-/dist/
-/nbdist/
-/.nb-gradle/
-build/
-!**/src/main/**/build/
-!**/src/test/**/build/
+app//nbproject/private/
+app//nbbuild/
+app//dist/
+app//nbdist/
+app//.nb-gradle/
+app/build/
+!app/**/src/main/**/build/
+!app/**/src/test/**/build/
 
 ### VS Code ###
-.vscode/
+app/.vscode/
+
+# Elastic Beanstalk Files
+eb/.elasticbeanstalk/*
+!eb/.elasticbeanstalk/config.yml
+!eb/.elasticbeanstalk/*.cfg.yml
+!eb/.elasticbeanstalk/*.global.yml
