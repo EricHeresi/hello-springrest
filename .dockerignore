@@ -6,5 +6,5 @@
 !gradlew
 !gradlew.bat
 !manifest.yml
-!settings.yml
+!settings.gradle
 
