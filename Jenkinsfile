@@ -6,6 +6,7 @@ pipeline {
     }
     options{
         timestamps()
+         ansiColor('xterm')
     }
     stages {
         stage('Git Login'){
