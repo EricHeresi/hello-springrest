@@ -1,37 +1,37 @@
-app/HELP.md
-app/target/
-!app/.mvn/wrapper/maven-wrapper.jar
-!app/gradle/wrapper/gradle-wrapper.jar
-!app/**/src/main/**/target/
-!app/**/src/test/**/target/
+HELP.md
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!gradle/wrapper/gradle-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
 
 ### STS ###
-app/.apt_generated
-app/.classpath
-app/.factorypath
-app/.project
-app/.settings
-app/.springBeans
-app/.sts4-cache
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
 
 ### IntelliJ IDEA ###
-app/.idea
-app/*.iws
-app/*.iml
-app/*.ipr
+.idea
+*.iws
+*.iml
+*.ipr
 
 ### NetBeans ###
-app//nbproject/private/
-app//nbbuild/
-app//dist/
-app//nbdist/
-app//.nb-gradle/
-app/build/
-!app/**/src/main/**/build/
-!app/**/src/test/**/build/
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+!**/src/main/**/build/
+!**/src/test/**/build/
 
 ### VS Code ###
-app/.vscode/
+.vscode/
 
 # Elastic Beanstalk Files
 eb/.elasticbeanstalk/*

@@ -1,0 +1,11 @@
+*
+!build/
+!gradle/
+!src/
+!.gradle/
+!build.gradle
+!gradlew
+!gradlew.bat
+!manifest.yml
+!settings.yml
+

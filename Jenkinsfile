@@ -18,17 +18,15 @@ pipeline {
         }
         stage('Tests'){
             steps {
-                dir('app') {
-                    sh './gradlew test'
-                }
+                sh './gradlew test'
             }
             post {
                 always {
-                    junit(testResults: 'app/build/test-results/test/*xml', allowEmptyResults: true)
+                    junit(testResults: 'build/test-results/test/*xml', allowEmptyResults: true)
                     jacoco(
-                        classPattern: 'app/build/classes/java/main', 
-                        execPattern: 'app/build/jacoco/*.exec',
-                        sourcePattern: 'app/src/main/java/com/example/restservice')
+                        classPattern: 'build/classes/java/main', 
+                        execPattern: 'build/jacoco/*.exec',
+                        sourcePattern: 'src/main/java/com/example/restservice')
                 }
             }
         }
