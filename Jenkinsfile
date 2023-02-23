@@ -24,7 +24,7 @@ pipeline {
             post {
                 always {
                     junit(testResults: 'app/build/test-results/test/*xml', allowEmptyResults: true)
-                    jacoco classPattern: 'app/build//classes/java/main', execPattern: 'app/build/jacoco/*.exec', inclusionPattern: 'app/build/java/main', sourcePattern: 'app/src/main/java'
+                    jacoco classPattern: 'app/build/classes/java/main', execPattern: 'app/build/jacoco/*.exec', sourcePattern: 'app/src/main/java/com/example/restservice'
                 }
             }
         }
