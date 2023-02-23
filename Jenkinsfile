@@ -16,9 +16,6 @@ pipeline {
                 }
             }
         }
-        stage ('Git check'){
-
-        }
         stage('PMD Check'){
             steps {
                 sh './gradlew check'
