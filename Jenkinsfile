@@ -16,17 +16,24 @@ pipeline {
                 }
             }
         }
-        stage('PMD Check'){
-            steps {
-                sh './gradlew check'
+        stage('Trivy'){
+            steps{
+                sh 'mkdir trivy'
                 sh 'trivy repo -f json -o trivy/results.json https://github.com/${GIT_PATH}'
                 sh 'trivy fs -f json -o trivy/results_fs.json .'
             }
-            post {
+            post{
                 always {
                     recordIssues(tools: [trivy(pattern: 'trivy/*.json')])
-                    //recordIssues(tools: [trivy(pattern: 'trivy repo -f json -o results_repo.json https://github.com/${GIT_PATH}')])
-                    //recordIssues(tools: [trivy(pattern: 'trivy fs -f json -o results_fs.json .')])
+                }
+            }
+        }
+        stage('PMD Check'){
+            steps {
+                sh './gradlew check'
+            }
+            post {
+                always {
                     recordIssues(tools: [pmdParser(pattern: 'build/reports/pmd/*.xml')])
                 }
             }
