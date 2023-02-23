@@ -16,12 +16,17 @@ pipeline {
                 }
             }
         }
+        stage ('Git check'){
+
+        }
         stage('PMD Check'){
             steps {
                 sh './gradlew check'
             }
             post {
                 always {
+                    recordIssues(tools: [trivy(pattern: 'trivy repo -f json -o results_repo.json https://github.com/${GIT_PATH}')])
+                    recordIssues(tools: [trivy(pattern: 'trivy fs -f json -o results_fs.json .')])
                     recordIssues(tools: [pmdParser(pattern: 'build/reports/pmd/*.xml')])
                 }
             }
@@ -49,6 +54,11 @@ pipeline {
                 sh 'git tag 1.0.${BUILD_NUMBER}'
                 sshagent(['github-ssh']) {
                     sh 'git push git@github.com:${GIT_PATH}.git --tags'
+                }
+            }
+            post {
+                always {
+                    recordIssues(tools: [trivy(pattern: 'trivy image -f json -o results.json ghcr.io/${GIT_PATH}/aws_springrest:latest')])
                 }
             }
         }
