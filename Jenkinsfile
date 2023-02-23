@@ -19,13 +19,8 @@ pipeline {
         stage('Trivy'){
             steps{
                 sh 'mkdir trivy'
-                sh 'trivy repo -f json -o trivy/results.json https://github.com/${GIT_PATH}'
+                sh 'trivy repo -f json -o trivy/results_repo.json https://github.com/${GIT_PATH}'
                 sh 'trivy fs -f json -o trivy/results_fs.json .'
-            }
-            post{
-                always {
-                    recordIssues(tools: [trivy(pattern: 'trivy/*.json')])
-                }
             }
         }
         stage('PMD Check'){
@@ -57,17 +52,18 @@ pipeline {
                 sh 'VERSION_TAG=1.0.${BUILD_NUMBER} docker-compose build'
                 sh 'VERSION_TAG=1.0.${BUILD_NUMBER} docker-compose push'
                 sh 'docker-compose build'
+                sh 'trivy image -f json -o results_img.json ghcr.io/${GIT_PATH}/aws_springrest:latest'
                 sh 'docker-compose push'
                 sh 'git tag 1.0.${BUILD_NUMBER}'
                 sshagent(['github-ssh']) {
                     sh 'git push git@github.com:${GIT_PATH}.git --tags'
                 }
             }
-            /*post {
+            post{
                 always {
-                    recordIssues(tools: [trivy(pattern: 'trivy image -f json -o results.json ghcr.io/${GIT_PATH}/aws_springrest:latest')])
+                    recordIssues(tools: [trivy(pattern: 'trivy/*.json')])
                 }
-            }*/
+            }
         }
         stage("Infrastructure"){
             steps {
