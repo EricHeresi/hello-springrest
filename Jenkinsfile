@@ -18,7 +18,6 @@ pipeline {
         }
         stage('Trivy'){
             steps{
-                sh 'mkdir trivy'
                 sh 'trivy repo -f json -o trivy/results_repo.json https://github.com/${GIT_PATH}'
                 sh 'trivy fs -f json -o trivy/results_fs.json .'
             }
