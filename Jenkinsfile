@@ -19,10 +19,12 @@ pipeline {
         stage('PMD Check'){
             steps {
                 sh './gradlew check'
+                sh 'trivy repo -f json -o results_repo.json https://github.com/${GIT_PATH}'
             }
             post {
                 always {
-                    recordIssues(tools: [trivy(pattern: 'trivy repo -f json -o results_repo.json https://github.com/${GIT_PATH}')])
+                    recordIssues(tools: [trivy(pattern: 'results.json')])
+                    //recordIssues(tools: [trivy(pattern: 'trivy repo -f json -o results_repo.json https://github.com/${GIT_PATH}')])
                     //recordIssues(tools: [trivy(pattern: 'trivy fs -f json -o results_fs.json .')])
                     recordIssues(tools: [pmdParser(pattern: 'build/reports/pmd/*.xml')])
                 }
