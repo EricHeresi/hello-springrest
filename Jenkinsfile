@@ -16,6 +16,16 @@ pipeline {
                 }
             }
         }
+        stage('PMD Check'){
+            steps {
+                sh './gradlew check'
+            }
+            post {
+                always {
+                    recordIssues(tools: [pmdParser(pattern: 'build/reports/pmd/*.xml')])
+                }
+            }
+        }
         stage('Tests'){
             steps {
                 sh './gradlew test'
